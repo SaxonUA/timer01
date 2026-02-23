@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Birthday Timer OBS</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:wght@100;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root { 
+      --accent: #ff9f0a; 
+    }
+
+    body {
+      background: transparent !important;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .widget {
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 40px 60px 30px;
+      text-align: center;
+      display: inline-block;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+
+    /* Виправлений заголовок */
+    .title {
+      font-family: 'Michroma', sans-serif;
+      font-size: 26px;
+      color: #fff;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin: 0 0 45px;
+      background: linear-gradient(180deg, #fff 0%, #bbb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    .flip-clock-wrapper { margin: 0 !important; }
+    
+    .flip-clock-wrapper ul {
+      height: 85px;
+      width: 58px;
+      background: #000;
+    }
+
+    .flip-clock-wrapper ul li a div div.inn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 64px;
+      background: #151515;
+      color: #fff;
+      border-radius: 10px;
+      text-shadow: 0 0 15px rgba(255, 159, 10, 0.4);
+    }
+
+    /* Українські підписи */
+    .flip-clock-divider .flip-clock-label {
+      color: var(--accent) !important;
+      font-family: 'Michroma', sans-serif;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      bottom: -38px !important;
+      opacity: 0.9;
+    }
+
+    .flip-clock-dot {
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    /* Дата знизу */
+    .date-display {
+      margin-top: 40px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 44px;
+      font-weight: 100;
+      color: #fff;
+      letter-spacing: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: inline-block;
+      padding-top: 20px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 600px) {
+      .widget { padding: 30px 20px; }
+      .title { font-size: 18px; }
+      .date-display { font-size: 28px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="widget">
+    <div class="title" id="title">До дня народження</div>
+
+    <div id="flip-clock"></div>
+
+    <div class="date-container">
+        <div class="date-display">01.03.2026</div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+
+  <script>
+    function getSeconds(){
+      // 1 Березня 2026 року
+      const target = new Date(2026, 2, 1, 0, 0, 0);
+      const now = new Date();
+      return Math.max(0, Math.floor((target - now)/1000));
+    }
+
+    $(function(){
+      const clock = $('#flip-clock').FlipClock(getSeconds(), {
+        clockFace: 'DailyCounter',
+        countdown: true,
+        callbacks: {
+          stop: function(){
+            $('#title').text('З ДНЕМ НАРОДЖЕННЯ! 🎂');
+            $('.title').css('background', 'linear-gradient(180deg, #ff9f0a 0%, #cc7a00 100%)');
+          }
+        }
+      });
+
+      // Встановлюємо українські назви
+      $('.days .flip-clock-label').text('Днів');
+      $('.hours .flip-clock-label').text('Годин');
+      $('.minutes .flip-clock-label').text('Хвилин');
+      $('.seconds .flip-clock-label').text('Секунд');
+    });
+  </script>
+</body>
+</html>
