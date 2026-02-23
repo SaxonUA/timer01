@@ -32,15 +32,15 @@
       -webkit-backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 40px;
-      padding: 50px 70px 40px;
+      padding: 50px 70px 25px;
       text-align: center;
       display: inline-block;
       box-shadow: 0 40px 80px rgba(0,0,0,0.6);
       position: relative;
-      overflow: hidden; /* Для ефекту відблиску */
+      overflow: hidden;
     }
 
-    /* Анімована лінія по периметру (опціонально, додає стилю) */
+    /* Анімація по контуру */
     .widget::before {
       content: "";
       position: absolute;
@@ -54,7 +54,6 @@
       100% { transform: translateX(100%); }
     }
 
-    /* Ефект відблиску на склі */
     .glare {
       position: absolute;
       top: -100%; left: -100%;
@@ -106,7 +105,7 @@
     .flip-clock-divider .flip-clock-label {
       color: var(--accent) !important;
       font-family: 'Michroma', sans-serif;
-      font-size: 14px; /* Трохи зменшив для балансу */
+      font-size: 14px;
       letter-spacing: 2px;
       text-transform: uppercase;
       bottom: -45px !important;
@@ -126,7 +125,7 @@
     }
 
     .date-display {
-      margin-top: 60px;
+      margin-top: 20px;
       font-family: 'Montserrat', sans-serif;
       font-size: 40px;
       font-weight: 100;
@@ -134,24 +133,28 @@
       letter-spacing: 10px;
       border-top: 1px solid rgba(255, 255, 255, 0.15);
       display: inline-block;
-      padding-top: 25px;
+      padding-top: 15px;
       text-shadow: 0 0 20px rgba(255,255,255,0.3);
       position: relative;
     }
 
-    /* Маленька іконка перед датою */
+    /* ТУТ ПРАВКИ ДЛЯ ТОРТА */
     .date-display::before {
       content: "🎂";
       font-size: 40px;
       margin-right: 15px;
+      /* Піднімаємо торт трохи вище відносно тексту */
+      display: inline-block;
+      transform: translateY(-5px); 
       vertical-align: middle;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     @media (max-width: 600px) {
-      .widget { padding: 40px 20px; }
+      .widget { padding: 40px 20px 20px; }
       .title { font-size: 30px; }
-      .date-display { font-size: 24px; }
+      .date-display { font-size: 24px; margin-top: 15px; }
+      .date-display::before { font-size: 24px; transform: translateY(-3px); }
     }
   </style>
 </head>
