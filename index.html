@@ -12,6 +12,7 @@
     :root { 
       --accent: #ff9f0a; 
       --glow: rgba(255, 159, 10, 0.6);
+      --gold: linear-gradient(180deg, #ffd700 0%, #ff9f0a 100%);
     }
 
     body {
@@ -32,26 +33,12 @@
       -webkit-backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 40px;
-      padding: 50px 70px 25px;
+      padding: 50px 70px 35px;
       text-align: center;
       display: inline-block;
       box-shadow: 0 40px 80px rgba(0,0,0,0.6);
       position: relative;
       overflow: hidden;
-    }
-
-    /* Анімація по контуру */
-    .widget::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      animation: scan-line 3s linear infinite;
-    }
-
-    @keyframes scan-line {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
     }
 
     .glare {
@@ -84,14 +71,7 @@
     }
 
     .flip-clock-wrapper { margin: 0 !important; }
-    
-    .flip-clock-wrapper ul {
-      height: 90px;
-      width: 60px;
-      background: #000;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
+    .flip-clock-wrapper ul { height: 90px; width: 60px; background: #000; }
     .flip-clock-wrapper ul li a div div.inn {
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
@@ -110,51 +90,57 @@
       text-transform: uppercase;
       bottom: -45px !important;
       opacity: 0.8;
-      text-shadow: 0 0 10px var(--glow);
     }
 
-    .flip-clock-dot {
-      background: var(--accent);
-      box-shadow: 0 0 15px var(--accent);
-      animation: pulse-dot 1s infinite;
-    }
+    .flip-clock-dot { background: var(--accent); box-shadow: 0 0 15px var(--accent); }
 
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.1); }
+    .date-container {
+      margin-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .date-display {
-      margin-top: 20px;
       font-family: 'Montserrat', sans-serif;
       font-size: 40px;
       font-weight: 100;
       color: #fff;
       letter-spacing: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      display: inline-block;
-      padding-top: 15px;
       text-shadow: 0 0 20px rgba(255,255,255,0.3);
       position: relative;
     }
 
-    /* ТУТ ПРАВКИ ДЛЯ ТОРТА */
     .date-display::before {
       content: "🎂";
       font-size: 40px;
       margin-right: 15px;
-      /* Піднімаємо торт трохи вище відносно тексту */
       display: inline-block;
       transform: translateY(-5px); 
       vertical-align: middle;
       opacity: 0.8;
     }
 
+    /* Новий стиль для тексту розіграшу */
+    .promo-text {
+      font-family: 'Michroma', sans-serif;
+      font-size: 40px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      background: var(--gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+      font-weight: bold;
+    }
+
     @media (max-width: 600px) {
-      .widget { padding: 40px 20px 20px; }
       .title { font-size: 30px; }
-      .date-display { font-size: 24px; margin-top: 15px; }
-      .date-display::before { font-size: 24px; transform: translateY(-3px); }
+      .date-display { font-size: 24px; }
+      .promo-text { font-size: 14px; }
     }
   </style>
 </head>
@@ -168,6 +154,7 @@
 
     <div class="date-container">
         <div class="date-display">01.03.2026</div>
+        <div class="promo-text">Розіграш 20 000 золота</div>
     </div>
   </div>
 
@@ -189,7 +176,6 @@
           stop: function(){
             $('#title').text('З ДНЕМ НАРОДЖЕННЯ! 🎉');
             $('.title').css('background', 'linear-gradient(180deg, #fff 0%, #ff9f0a 100%)');
-            $('.widget').css('border-color', 'var(--accent)');
           }
         }
       });
